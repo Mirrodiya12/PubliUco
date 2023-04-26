@@ -1,18 +1,18 @@
-package co.edu.uco.publiuco.dto;
+package co.edu.uco.publiuco.entities;
 
 import java.util.UUID;
 
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
 import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 
-public final class EstadoTipoRelacionInstitucionDTO {
+public final class EstadoTipoRelacionInstitucionEntities {
 
-	
+	private static final EstadoTipoRelacionInstitucionEntities DEFAULT_OBJECT = new EstadoTipoRelacionInstitucionEntities();
 	private UUID identificador;
 	private String nombre;
 	private String descripcion;
 	
-	public EstadoTipoRelacionInstitucionDTO() {
+	private EstadoTipoRelacionInstitucionEntities() {
 		super();
 		setIdentificador(UtilUUID.DEFAULT_UUID);
 		setNombre(UtilText.EMPTY);
@@ -20,50 +20,46 @@ public final class EstadoTipoRelacionInstitucionDTO {
 	}
 	
 	
-	public EstadoTipoRelacionInstitucionDTO(UUID identificador, String nombre, String descripcion) {
+	public EstadoTipoRelacionInstitucionEntities(UUID identificador, String nombre, String descripcion) {
 		super();
 		setIdentificador(identificador);
 		setNombre(nombre);
 		setDescripcion(descripcion);
 	}
 	
-	public static EstadoTipoRelacionInstitucionDTO create() {
-		return new EstadoTipoRelacionInstitucionDTO();
+	public static EstadoTipoRelacionInstitucionEntities getDefaultObject() {
+		return DEFAULT_OBJECT;
 	}
+	
 	
 	public final UUID getIdentificador() {
 		return identificador;
 	}
 	
-	public final EstadoTipoRelacionInstitucionDTO setIdentificador(final UUID identificador) {
+	private final void setIdentificador(final UUID identificador) {
 		this.identificador = identificador;
 		
-		return this;
 	}
 	
 	public final String getNombre() {
 		return nombre;
 	}
 	
-	public final EstadoTipoRelacionInstitucionDTO setNombre(final String nombre) {
+	private final void setNombre(final String nombre) {
 		
 		this.nombre = UtilText.getUtilText().applyTrim(nombre);
-		
-		return this;
+	
 	}
-	
-	
 	
 	public final String getDescripcion() {
 		return descripcion;
 	}
 	
-	public final EstadoTipoRelacionInstitucionDTO setDescripcion(final String descripcion) {
+	private final void setDescripcion(final String descripcion) {
 		this.descripcion = UtilText.getUtilText().applyTrim(descripcion);
 		
-		return this;
 	}
-	
 
+	
 	
 }
