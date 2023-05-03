@@ -2,17 +2,17 @@ package co.edu.uco.publiuco.data.dao;
 
 import java.util.List;
 
-import co.edu.uco.publiuco.entities.EstadoTipoRelacionInstitucionEntities;
+import co.edu.uco.publiuco.entities.TipoRelacionInstitucionEntities;
 
 public interface TipoRelacionInstitucionDAO {
 	
-	void create(EstadoTipoRelacionInstitucionEntities entities);
+	void create(TipoRelacionInstitucionEntities entities);
 	
-	List<EstadoTipoRelacionInstitucionEntities> read(EstadoTipoRelacionInstitucionEntities entities);
+	List<TipoRelacionInstitucionEntities> read(TipoRelacionInstitucionEntities entities);
 	
-	void update(EstadoTipoRelacionInstitucionEntities entities);
+	void update(TipoRelacionInstitucionEntities entities);
 	
-	void delete(EstadoTipoRelacionInstitucionEntities entities);
+	void delete(TipoRelacionInstitucionEntities entities);
 
 }
 

@@ -27,7 +27,7 @@ public final class EstadoTipoRelacionInstitucionBusinessImpl implements EstadoTi
 	@Override
 	public final List<EstadoTipoRelacionInstitucionDomain> list(final EstadoTipoRelacionInstitucionDomain domain) {
 		final EstadoTipoRelacionInstitucionEntities entities = EstadoTipoRelacionInstitucionAssembler.getInstance().toEntitiesFromDomain(domain);		
-		final List<EstadoTipoRelacionInstitucionEntities> result = daoFactory.getTipoRelacionInstitucionDAO().read(entities);
+		final List<EstadoTipoRelacionInstitucionEntities> result = daoFactory.getEstadoTipoRelacionInstitucionDAO().read(entities);
 		return null;
 	}
 

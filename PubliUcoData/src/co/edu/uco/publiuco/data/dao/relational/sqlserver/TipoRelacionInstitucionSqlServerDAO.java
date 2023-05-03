@@ -13,27 +13,28 @@ public class TipoRelacionInstitucionSqlServerDAO implements TipoRelacionInstituc
 	}
 
 	@Override
-	public final void create(final TipoRelacionInstitucionEntities entities) {
+	public void create(TipoRelacionInstitucionEntities entities) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public final List<TipoRelacionInstitucionEntities> read(final TipoRelacionInstitucionEntities entities) {
+	public List<TipoRelacionInstitucionEntities> read(TipoRelacionInstitucionEntities entities) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public final void update(final TipoRelacionInstitucionEntities entities) {
+	public void update(TipoRelacionInstitucionEntities entities) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public final void delete(final TipoRelacionInstitucionEntities entities) {
+	public void delete(TipoRelacionInstitucionEntities entities) {
 		// TODO Auto-generated method stub
 		
 	}
-
 }
+
+
