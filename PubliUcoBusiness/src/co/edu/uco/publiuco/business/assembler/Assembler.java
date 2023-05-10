@@ -7,4 +7,5 @@ public interface Assembler <D, T, E>{
 		E toEntitiesFromDomain(D domain);
 		D toDomainFromEntities(E entities);
 	
+		
 }
