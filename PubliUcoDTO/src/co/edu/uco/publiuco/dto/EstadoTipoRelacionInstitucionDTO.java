@@ -8,7 +8,7 @@ import co.edu.uco.publiuco.crosscutting.utils.UtilUUID;
 public final class EstadoTipoRelacionInstitucionDTO {
 
 	
-	private UUID  identificador;
+	private UUID identificador;
 	private String nombre;
 	private String descripcion;
 	
