@@ -4,7 +4,7 @@ import java.util.List;
 
 import co.edu.uco.publiuco.entities.EstadoTipoRelacionInstitucionEntities;
 
-public interface EstadoTipoRelacionInstitucionDAO {
+public interface EstadoTipoRelacionInstitucionDAO{
 	
 	void create(EstadoTipoRelacionInstitucionEntities entities);
 	
