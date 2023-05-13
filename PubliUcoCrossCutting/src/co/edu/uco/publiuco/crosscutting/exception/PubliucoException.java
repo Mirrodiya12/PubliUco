@@ -3,25 +3,29 @@ package co.edu.uco.publiuco.crosscutting.exception;
 import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
 
+
 public class PubliucoException extends RuntimeException {
-	
+
 	private static final long serialVersionUID = 1L;
 	private ExceptionType type;
-	private String userMessage;
+	private String UserMessage;
 	
-	protected PubliucoException(String technicalMessage, String userMessage, Throwable rootCause, ExceptionType type) {
-		super(technicalMessage, rootCause);
+	protected PubliucoException(String techinaMessage, String userMessage, Throwable rootCase, ExceptionType type) {
+		super(techinaMessage, rootCase);
 		setUserMessage(userMessage);
 		setType(type);
+	}
+	
+	
+	public final String getTechnicalMessage() {
+		return UtilText.getUtilText().getDefaultIfEmpty(getMessage(), getUserMessage());
+	}
+	
+	private final void setTechnicalMessage(final String technicalMessage) {
 		
 	}
 	
-	public final String setTechnicalMessage() {
-		return UtilText.getUtilText().getDefaultIfEmpty(getMessage(), getUserMessage());
-			
-	}
-	
-	public final Throwable getRootCause() {
+	public final Throwable getRooCase() {
 		return UtilObject.getDefault(getCause(), new Exception());
 	}
 
@@ -30,16 +34,16 @@ public class PubliucoException extends RuntimeException {
 	}
 
 	private final void setType(final ExceptionType type) {
-		
 		this.type = UtilObject.getDefault(type, ExceptionType.GENERAL);
 	}
 
 	public final String getUserMessage() {
-		return userMessage;
+		return UserMessage;
 	}
 
-	public final void setUserMessage(final String userMessage) {
-		this.userMessage = UtilText.getUtilText().getDefault(userMessage);
+	public final void setUserMessage(String userMessage) {
+		UserMessage = UtilText.getUtilText().getDefault(userMessage);
 	}
-
+	
+	
 }
