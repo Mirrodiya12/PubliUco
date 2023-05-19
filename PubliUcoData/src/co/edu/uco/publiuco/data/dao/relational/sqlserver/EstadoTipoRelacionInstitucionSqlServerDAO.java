@@ -1,11 +1,14 @@
 package co.edu.uco.publiuco.data.dao.relational.sqlserver;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 import java.util.ArrayList;
 
 import co.edu.uco.publiuco.crosscutting.exception.PubliucoDataException;
+import co.edu.uco.publiuco.crosscutting.exception.PubliucoException;
 import co.edu.uco.publiuco.crosscutting.utils.UtilObject;
 import co.edu.uco.publiuco.crosscutting.utils.UtilSql;
 import co.edu.uco.publiuco.crosscutting.utils.UtilText;
@@ -34,7 +37,7 @@ public class EstadoTipoRelacionInstitucionSqlServerDAO extends SqlDAO<EstadoTipo
 		
 		}catch (final SQLException exception) {
 			var userMessage="Se registro un problema registrando el nuevo estado";
-			var technicalMessage="Se ha presentado un problema dentro del metodo create en la clase";
+			var technicalMessage="Se ha presentado un problema del tipo SQLException dentro del metodo create en la clase";
 			
 			throw PubliucoDataException.create(technicalMessage, userMessage, exception );
 			
@@ -51,6 +54,7 @@ public class EstadoTipoRelacionInstitucionSqlServerDAO extends SqlDAO<EstadoTipo
 	@Override
 	public final List<EstadoTipoRelacionInstitucionEntities> read(final EstadoTipoRelacionInstitucionEntities entities) {
 		var sqlStatement = new StringBuilder();
+		var parameters = new ArrayList<>();
 		
 		sqlStatement.append(prepareSelect());
 		sqlStatement.append(prepareFrom());
@@ -59,12 +63,26 @@ public class EstadoTipoRelacionInstitucionSqlServerDAO extends SqlDAO<EstadoTipo
 		
 		try (var preparedStatement = getConnection().prepareStatement(sqlStatement.toString())){
 			
-		}catch(SQLException exception) {
+			setParameters(preparedStatement, parameters);
 			
-		}catch(Exception exception) {
+			return executeQuery(preparedStatement);
+			
+		}catch(PubliucoException exception) {
+			throw exception;
+			
+		}catch (final SQLException exception) {
+			var userMessage="Se registro un problema al actualizar el nuevo estado";
+			var technicalMessage="Se ha presentado un problema del tipo SQLException dentro del metodo update en la clase";
+			
+			throw PubliucoDataException.create(technicalMessage, userMessage, exception );
+			
+		}catch (final Exception exception) {
+			var userMessage="Se registro un problema inesperado actualizando en el nuevo estado";
+			var technicalMessage="Se ha presentado un problema inesperado dentro del metodo update en la clase";
+			
+			throw PubliucoDataException.create(technicalMessage, userMessage, exception );
 			
 		}
-		return null;
 	}
 
 	@Override
@@ -80,7 +98,7 @@ public class EstadoTipoRelacionInstitucionSqlServerDAO extends SqlDAO<EstadoTipo
 		
 		}catch (final SQLException exception) {
 			var userMessage="Se registro un problema actualizando el nuevo estado";
-			var technicalMessage="Se ha presentado un problema dentro del metodo update en la clase";
+			var technicalMessage="Se ha presentado un problema del tipo SQLException dentro del metodo update en la clase";
 			
 			throw PubliucoDataException.create(technicalMessage, userMessage, exception );
 			
@@ -106,7 +124,7 @@ public class EstadoTipoRelacionInstitucionSqlServerDAO extends SqlDAO<EstadoTipo
 		
 		}catch (final SQLException exception) {
 			var userMessage="Se registro un problema eliminando el nuevo estado";
-			var technicalMessage="Se ha presentado un problema dentro del metodo delete en la clase";
+			var technicalMessage="Se ha presentado un problema del tipo SQLException dentro del metodo delete en la clase";
 			
 			throw PubliucoDataException.create(technicalMessage, userMessage, exception );
 			
@@ -161,4 +179,61 @@ public class EstadoTipoRelacionInstitucionSqlServerDAO extends SqlDAO<EstadoTipo
 		return "ORDER BY nombre ASC";
 	}
 
+	@Override
+	protected void setParameters(final PreparedStatement preparedStatement, List<Object> parameters) {
+		try {
+		if(!UtilObject.isNull(parameters) && !UtilObject.isNull(preparedStatement)) {
+			for(int index = 0;index < parameters.size(); index++) {
+				preparedStatement.setObject(index + 1, parameters.get(index));
+			}
+		}
+		
+	}catch (final SQLException exception) {
+		var userMessage="Se registro un problema tratando de consultar la informacion el estado";
+		var technicalMessage="Se ha presentado un problema del tipo SQLException dentro del metodo setParameters en la clase";
+		
+		throw PubliucoDataException.create(technicalMessage, userMessage, exception );
+		
+	}catch (final Exception exception) {
+		var userMessage="Se registro un problema inesperado al consultar el estado";
+		var technicalMessage="Se ha presentado un problema inesperado dentro del metodo setParameters en la clase";
+		
+		throw PubliucoDataException.create(technicalMessage, userMessage, exception );
+		
+	}
+	
+	
+
+}
+
+	@Override
+	protected List<EstadoTipoRelacionInstitucionEntities> executeQuery(PreparedStatement preparedStatement) {
+		
+		final List<EstadoTipoRelacionInstitucionEntities> result = new ArrayList<>();
+		
+		try(var resultSet = preparedStatement.executeQuery()){
+			
+			while(resultSet.next()) {
+				var entitiesTmp = new EstadoTipoRelacionInstitucionEntities(resultSet.getObject("identificador", UUID.class), resultSet.getString("nombre"), resultSet.getString("Descripcion"));
+				
+				result.add(entitiesTmp);
+			}
+			
+			return result;
+			
+		}catch (final SQLException exception) {
+			var userMessage="Se registro un problema tratando de consultar la informacion el estado";
+			var technicalMessage="Se ha presentado un problema del tipo SQLException dentro del metodo executeQuery en la clase";
+			
+			throw PubliucoDataException.create(technicalMessage, userMessage, exception );
+			
+		}catch (final Exception exception) {
+			var userMessage="Se registro un problema inesperado al consultar el estado";
+			var technicalMessage="Se ha presentado un problema inesperado dentro del metodo executeQuery en la clase";
+			
+			throw PubliucoDataException.create(technicalMessage, userMessage, exception );
+			
+		}
+
+	}
 }

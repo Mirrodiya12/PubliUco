@@ -27,6 +27,16 @@ public final class EstadoTipoRelacionInstitucionEntities {
 		setDescripcion(descripcion);
 	}
 	
+	public static final EstadoTipoRelacionInstitucionEntities createWhitIdentificador (final UUID identificador) {
+		return new EstadoTipoRelacionInstitucionEntities(identificador, UtilText.getUtilText().getDefaultValue());
+	}
+	
+	public static final EstadoTipoRelacionInstitucionEntities createWhitNombre (final String nombre) {
+		return new EstadoTipoRelacionInstitucionEntities(nombre, UtilText.getUtilText().getDefaultValue());
+	}
+	
+	
+	
 	public static EstadoTipoRelacionInstitucionEntities getDefaultObject() {
 		return DEFAULT_OBJECT;
 	}
